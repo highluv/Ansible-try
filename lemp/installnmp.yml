@@ -1,0 +1,45 @@
+---
+- name: Installing everything
+  hosts: debhosts
+  become: true
+
+  tasks:
+
+  - name: adding mysql repo
+    apt_repository:
+      repo: deb http://repo.mysql.com/apt/debian/ bookworm mysql-tools mysql-8.4-lts
+      state: present
+      filename: mysql8.4-lts
+      update_cache: no
+
+  - name: adding mysql apt pub key
+    apt_key:
+      keyserver: pgp.mit.edu
+      id: A8D3785C
+      state: present
+
+  - name: update cache
+    apt:
+      update_cache: yes
+      force: yes
+  - name: installing mysql and other
+    apt:
+      name:
+        - mysql-server
+        - mysql-client
+        - nginx
+        - php
+        - php-cli
+        - php-common
+        - php-zip
+        - php-json
+        - php-fpm
+        - php-mysql
+        - php-curl
+        - php-gd
+        - php-mbstring
+        - php-xml
+        - php-xmlrpc
+        - phpmyadmin
+      state: latest
+

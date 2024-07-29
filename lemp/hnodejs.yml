@@ -1,0 +1,10 @@
+debhosts:
+  hosts:
+    pidrila:
+      ansible_host: localhost
+      ansible_user: nodejs
+      ansible_password: 87356
+    rabotai:
+      ansible_host: 192.168.1.79
+      ansible_user: nodejs
+      ansible_password: 87356

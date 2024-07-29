@@ -1,0 +1,25 @@
+---
+- name: basic
+  hosts: debhosts
+  become: true
+
+  tasks:
+
+  - name: update cache
+    apt:
+      update_cache: true
+
+  - name: installing
+    apt:
+      name:
+        - curl
+        - wget
+        - lsb-release
+        - sudo
+        - apt-transport-https
+        - software-properties-common
+        - whois
+        - python3-passlib
+        - acl
+        - python3-pip
+      state: latest

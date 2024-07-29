@@ -1,0 +1,10 @@
+---
+- name: whats ansible env
+  hosts: debhosts
+  become: true
+  become_flags: -i
+  become_user: nodejs
+
+  tasks:
+  - name: debug
+    debug: var=ansible_env.HOME
