@@ -1,0 +1,26 @@
+---
+- name: try to get status of services
+  hosts: localhost
+  become: true
+
+  tasks:
+  - name: getting status
+    service_facts:
+    register: my_var_for_service_facts # Аутпут регистрируем
+
+  - name: output
+    debug:
+      var: my_var_for_service_facts.ansible_facts.services.apache2 # ОЧЕНЬ СЛОЖНАЯ ХУЙНЯ. В МОЕЙ ПЕРЕМЕННОЙ ЛЕЖИТ СЛОВАРЬ
+# ansible_facts, в нем лежит другой словарь servoces, и только потом лежит apache2
+
+  - name: try to output
+    debug:
+      msg: "{{ansible_facts.services['apache2.service']}}" # Так проще и потом можно выбрать один из пунктов, для фильтра 
+
+  - name: nginx
+    debug:
+      msg: "{{ansible_facts.services['nginx.service']}}"
+
+  - name: try to get state
+    debug:
+      msg: "{{ansible_facts.services['nginx.service'].status}}"
